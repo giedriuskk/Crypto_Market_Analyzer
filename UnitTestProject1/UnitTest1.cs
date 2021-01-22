@@ -1,5 +1,4 @@
 ﻿using CryptoCoinDataFromApi;
-using Crypto_Analyzer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
