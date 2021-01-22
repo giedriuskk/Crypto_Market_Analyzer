@@ -83,13 +83,13 @@ namespace CryptoCoinDataFromApi
 
     public class AccessProvider : ICryptoCoinProvider
     {
-        private readonly ICryptoCoinProvider m_provider;
+        private readonly ICryptoCoinProvider I;
         private Info coinsInfo = null;
         private List<Coin> coins = null;
         private List<CoinInfo> allCoinInfo = null;
         public AccessProvider(ICryptoCoinProvider provider)
         {
-            m_provider = provider;
+            I = provider;
         }
         public List<Coin> GetCoins(string start)
         {
@@ -97,28 +97,28 @@ namespace CryptoCoinDataFromApi
                 if(String.Equals(coins[0].Id, start))
                     return coins;
          
-            return coins = m_provider.GetCoins(start);
+            return coins = I.GetCoins(start);
         }
 
 
         public string AverageMarketChange(List<Coin> coins)
         {
             
-           return m_provider.AverageMarketChange(coins);
+           return I.AverageMarketChange(coins);
         }
 
         public List<CoinInfo> GetAllCoinInfo(string Id)
         {
             if (allCoinInfo != null)
                 return allCoinInfo;
-            return allCoinInfo = m_provider.GetAllCoinInfo(Id);
+            return allCoinInfo = I.GetAllCoinInfo(Id);
         }
 
         public Info GetTotalCoins()
         {
             if (coinsInfo != null)
                 return coinsInfo;
-            return coinsInfo = m_provider.GetTotalCoins();
+            return coinsInfo = I.GetTotalCoins();
         }
 
 

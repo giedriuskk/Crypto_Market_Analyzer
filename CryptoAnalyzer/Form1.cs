@@ -37,11 +37,11 @@ namespace Crypto_Analyzer
             listView1.Items.Clear();
             
             var result = I.GetCoins(textBox1.Text);
-            foreach(var movie in result)
+            foreach(var coin in result)
             {
                 
-                    var item = new ListViewItem(new[] { movie.Name, movie.PriceUsd, movie.PercentChange24, movie.PercentChange7d, movie.Rank, movie.MarketCapUSD });
-                    item.Tag = movie;
+                    var item = new ListViewItem(new[] { coin.Name, coin.PriceUsd, coin.PercentChange24, coin.PercentChange7d, coin.Rank, coin.MarketCapUSD });
+                    item.Tag = coin;
                     listView1.Items.Add(item);
 
             }
@@ -53,6 +53,14 @@ namespace Crypto_Analyzer
               
                 var selected = listView1.FocusedItem.Text;
                 var result = I.GetCoins(textBox1.Text);
+                var r= result.Find(x => x.Name.Contains(selected));
+                var CoinID = r.Id;
+                Form2 coinInfo = new Form2();
+
+                coinInfo.CoinID = CoinID;
+                coinInfo.ShowDialog();
+
+                /*
                 foreach (var r in result)
                 {
                     if ((r.Name).Equals(selected))
@@ -66,6 +74,7 @@ namespace Crypto_Analyzer
                     }
 
                 }
+                */
             }
         }
 
@@ -74,12 +83,12 @@ namespace Crypto_Analyzer
         {
             listView1.Items.Clear();
             var result = I.GetCoins(textBox1.Text);
-            foreach (var movie in result)
+            foreach (var coin in result)
             {
-                if (float.Parse(numericUpDown1.Text) <= float.Parse(movie.PercentChange24) && float.Parse(numericUpDown2.Text) >= float.Parse(movie.PercentChange24))
+                if (float.Parse(numericUpDown1.Text) <= float.Parse(coin.PercentChange24) && float.Parse(numericUpDown2.Text) >= float.Parse(coin.PercentChange24))
                 {
-                    var item = new ListViewItem(new[] { movie.Name, movie.PriceUsd, movie.PercentChange24, movie.PercentChange7d, movie.Rank, movie.MarketCapUSD });
-                    item.Tag = movie;
+                    var item = new ListViewItem(new[] { coin.Name, coin.PriceUsd, coin.PercentChange24, coin.PercentChange7d, coin.Rank, coin.MarketCapUSD });
+                    item.Tag = coin;
                     listView1.Items.Add(item);
                 }
 
@@ -94,7 +103,6 @@ namespace Crypto_Analyzer
             List<Coin> coins = I.GetCoins(textBox1.Text);
             var result = I.AverageMarketChange(coins);
             ListViewItem item = new ListViewItem();
-            Console.WriteLine(result);
             listView2.Items.Add(result + " %");
         }
 

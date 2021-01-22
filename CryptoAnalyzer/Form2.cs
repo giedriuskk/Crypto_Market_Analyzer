@@ -26,7 +26,6 @@ namespace Crypto_Analyzer
         {
             
             var CoinInfo = I.GetAllCoinInfo(CoinID);
-            Console.WriteLine(CoinInfo);
 
             foreach (var Coin in CoinInfo)
             {
