@@ -26,16 +26,16 @@ namespace CryptoCoinDataFromApi
             using (HttpClient client = new HttpClient())
             {
                 bool success = Int32.TryParse(start, out int val);
-                client.BaseAddress = new Uri("https://api.coinlore.net/api/tickers/");
+                client.BaseAddress = new Uri("https://api.coinlore.net/api/");
                 string s;
                 if (success)
                 {
                     
-                    s = client.GetStringAsync("?start=" + start + "&limit=100").Result;
+                    s = client.GetStringAsync("tickers/?start=" + start + "&limit=100").Result;
                 }
                 else
                 {
-                    s = client.GetStringAsync("?start=0&limit=100").Result;
+                    s = client.GetStringAsync("tickers/?start=0&limit=100").Result;
                     
                 }
                 var list = JsonConvert.DeserializeObject<Root>(s);
@@ -48,8 +48,8 @@ namespace CryptoCoinDataFromApi
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://api.coinlore.net/api/tickers/");
-                string s = client.GetStringAsync("").Result;
+                client.BaseAddress = new Uri("https://api.coinlore.net/api/");
+                string s = client.GetStringAsync("tickers/").Result;
                 var result = JsonConvert.DeserializeObject<Root>(s);
                 return result.info;
             }
@@ -59,8 +59,8 @@ namespace CryptoCoinDataFromApi
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://api.coinlore.net/api/ticker/?id=" + coinId);
-                string s = client.GetStringAsync("").Result;
+                client.BaseAddress = new Uri("https://api.coinlore.net/api/" );
+                string s = client.GetStringAsync("ticker/?id=" + coinId).Result;
                 var result = JsonConvert.DeserializeObject <List<CoinInfo>>(s);
                 return result;
             }
