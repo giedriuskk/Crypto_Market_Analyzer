@@ -76,7 +76,7 @@ namespace Crypto_Market_Analyzer_Tests
         {
             Provider provider = new Provider();
             var total_coins = provider.GetTotalCoins();
-            Assert.AreEqual(5479, total_coins.coins_num);
+            Assert.AreEqual(5481, total_coins.coins_num);
 
         }
 

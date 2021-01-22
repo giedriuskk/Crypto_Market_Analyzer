@@ -26,21 +26,21 @@ namespace CryptoCoinDataFromApi
             using (HttpClient client = new HttpClient())
             {
                 bool success = Int32.TryParse(start, out int val);
+                client.BaseAddress = new Uri("https://api.coinlore.net/api/tickers/");
+                string s;
                 if (success)
                 {
-                    client.BaseAddress = new Uri("https://api.coinlore.net/api/tickers/");
-                    string s = client.GetStringAsync("?start=" + start + "&limit=100").Result;
-                    var list = JsonConvert.DeserializeObject<Root>(s);
-                    return list.data;
+                    
+                    s = client.GetStringAsync("?start=" + start + "&limit=100").Result;
                 }
                 else
                 {
-                    client.BaseAddress = new Uri("https://api.coinlore.net/api/tickers/");
-                    string s = client.GetStringAsync("?start=0&limit=100").Result;
-                    var list = JsonConvert.DeserializeObject<Root>(s);
-                    return list.data;
+                    s = client.GetStringAsync("?start=0&limit=100").Result;
+                    
                 }
-                
+                var list = JsonConvert.DeserializeObject<Root>(s);
+                return list.data;
+
             }
         }
 
